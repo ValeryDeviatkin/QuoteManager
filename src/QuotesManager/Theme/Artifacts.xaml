@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system = "clr-namespace:System;assembly=mscorlib">
+
+    <!--SIZES-->
+    <system:Double x:Key = "DefaultFontSize">25</system:Double>
+    <system:Double x:Key = "DefaultControlHeight">60</system:Double>
+    <system:Double x:Key = "StartMenuButtonWidth">190</system:Double>
+
+    <!--COLORS-->
+    <Brush x:Key = "BlackBrush">#FF000000</Brush>
+    <Brush x:Key = "DefaultForeground">CornflowerBlue</Brush>
+    <Brush x:Key = "DefaultBackground">#D0493E8E</Brush>
+
+</ResourceDictionary>
