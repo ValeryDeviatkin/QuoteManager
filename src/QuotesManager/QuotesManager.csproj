@@ -82,7 +82,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AppCommands.cs" />
     <Compile Include="AppLifecycleManager.cs" />
+    <Compile Include="Commands\RefreshCurrencyCommand.cs" />
+    <Compile Include="Commands\SearchCurrencyCommand.cs" />
+    <Compile Include="Commands\UploadCurrencyListCommand.cs" />
     <Compile Include="Constants\UiConstants.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -91,7 +95,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Folder Include="DataModels\" />
+    <Folder Include="ExtensionMethods\" />
+    <Folder Include="Wpf\Behaviors\" />
+    <Folder Include="Wpf\Converters\" />
+    <Folder Include="Wpf\TemplateSelectors\" />
+    <Folder Include="Wpf\TriggerActions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

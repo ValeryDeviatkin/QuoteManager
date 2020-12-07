@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using QuotesManager.Commands;
 using QuotesManager.ViewModels;
 using QuotesManager.Views;
 using Unity;
@@ -46,6 +47,7 @@ namespace QuotesManager
             try
             {
                 _container
+
                     // Views.
                    .RegisterSingleton<MainWindow>()
 
@@ -53,6 +55,10 @@ namespace QuotesManager
                    .RegisterType<MainViewModel>()
 
                     // Commands.
+                   .RegisterType<AppCommands>()
+                   .RegisterType<UploadCurrencyListCommand>()
+                   .RegisterType<RefreshCurrencyCommand>()
+                   .RegisterType<SearchCurrencyCommand>()
 
                     // Services.
                     ;

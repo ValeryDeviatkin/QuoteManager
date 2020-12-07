@@ -7,9 +7,13 @@ namespace QuotesManager.ViewModels
     {
         private readonly IUnityContainer _container;
 
-        public MainViewModel(IUnityContainer container)
+        public MainViewModel(IUnityContainer container, AppCommands commands)
         {
             _container = container.RegisterInstance(this);
+
+            Commands = commands;
         }
+
+        public AppCommands Commands { get; }
     }
 }
