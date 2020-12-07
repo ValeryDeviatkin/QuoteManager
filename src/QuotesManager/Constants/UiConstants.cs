@@ -4,12 +4,12 @@ namespace QuotesManager.Constants
 {
     internal static class UiSizes
     {
-        public const double BorderRadiusSize = 5d;
-        public const double BorderThicknessSize = 2d;
+        public const double BorderRadiusSize = 2d;
+        public const double BorderThicknessSize = 1d;
 
-        public const double TextSpacing = 5d;
-        public const double InnerSpacing = 15d;
-        public const double OuterSpacing = 30d;
+        public const double TextSpacing = 2d;
+        public const double InnerSpacing = 5d;
+        public const double OuterSpacing = 20d;
 
         public static readonly CornerRadius BorderRadius = new CornerRadius(BorderRadiusSize);
         public static readonly Thickness BorderThickness = new Thickness(BorderThicknessSize);

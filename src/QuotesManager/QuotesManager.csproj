@@ -66,6 +66,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ConvertCurrencyCommand.cs" />
+    <Compile Include="Views\Regions\CurrencyConverterRegion.xaml.cs">
+      <DependentUpon>CurrencyConverterRegion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regions\CurrencyListRegion.xaml.cs">
+      <DependentUpon>CurrencyListRegion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regions\CurrencySearchRegion.xaml.cs">
+      <DependentUpon>CurrencySearchRegion.xaml</DependentUpon>
+    </Compile>
     <Page Include="Theme\Artifacts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,13 +96,25 @@
     <Compile Include="AppLifecycleManager.cs" />
     <Compile Include="Commands\RefreshCurrencyCommand.cs" />
     <Compile Include="Commands\SearchCurrencyCommand.cs" />
-    <Compile Include="Commands\UploadCurrencyListCommand.cs" />
+    <Compile Include="Commands\DownloadCurrencyListCommand.cs" />
     <Compile Include="Constants\UiConstants.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Regions\CurrencyConverterRegion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regions\CurrencyListRegion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regions\CurrencySearchRegion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataModels\" />
@@ -111,6 +133,13 @@
       <Project>{F3B8943A-CC9E-4604-91A4-C249D733FEB4}</Project>
       <Name>Wpf.Tools</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Theme\Icons\Download50.png" />
+    <Resource Include="Theme\Icons\Refresh50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Theme\Icons\Search50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

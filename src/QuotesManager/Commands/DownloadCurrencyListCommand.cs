@@ -3,11 +3,11 @@ using Wpf.Tools.Base;
 
 namespace QuotesManager.Commands
 {
-    public class UploadCurrencyListCommand : CommandBase
+    public class DownloadCurrencyListCommand : CommandBase
     {
         private readonly IUnityContainer _container;
 
-        public UploadCurrencyListCommand(IUnityContainer container)
+        public DownloadCurrencyListCommand(IUnityContainer container)
         {
             _container = container.RegisterInstance(this);
         }

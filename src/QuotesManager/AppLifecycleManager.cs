@@ -56,9 +56,10 @@ namespace QuotesManager
 
                     // Commands.
                    .RegisterType<AppCommands>()
-                   .RegisterType<UploadCurrencyListCommand>()
+                   .RegisterType<DownloadCurrencyListCommand>()
                    .RegisterType<RefreshCurrencyCommand>()
                    .RegisterType<SearchCurrencyCommand>()
+                   .RegisterType<ConvertCurrencyCommand>()
 
                     // Services.
                     ;

@@ -3,8 +3,33 @@
         xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable = "d">
+        xmlns:constants = "clr-namespace:QuotesManager.Constants"
+        xmlns:regions = "clr-namespace:QuotesManager.Views.Regions"
+        mc:Ignorable = "d"
+        Title = "Quote Manager"
+        WindowStartupLocation = "CenterScreen"
+        ResizeMode = "NoResize"
+        SizeToContent = "Width"
+        Background = "{StaticResource DefaultBackgroundBrush}"
+        BorderThickness = "{x:Static constants:UiSizes.BorderThickness}"
+        BorderBrush = "{StaticResource DefaultBorderBrush}">
 
-    <Grid />
+    <Grid Margin = "{x:Static constants:UiSizes.OuterSpacingThickness}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width = "Auto" />
+            <ColumnDefinition Width = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
+            <ColumnDefinition Width = "Auto" />
+        </Grid.ColumnDefinitions>
+        <regions:CurrencyListRegion Grid.Column = "0" />
+        <Grid Grid.Column = "2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height = "Auto" />
+                <RowDefinition Height = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
+                <RowDefinition Height = "*" />
+            </Grid.RowDefinitions>
+            <regions:CurrencyConverterRegion Grid.Row = "0" />
+            <regions:CurrencySearchRegion Grid.Row = "2" />
+        </Grid>
+    </Grid>
 
 </Window>

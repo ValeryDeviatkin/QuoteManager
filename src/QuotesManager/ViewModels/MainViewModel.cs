@@ -7,6 +7,13 @@ namespace QuotesManager.ViewModels
     {
         private readonly IUnityContainer _container;
 
+        /// <summary>
+        ///     Only for design DataContext creation.
+        /// </summary>
+        public MainViewModel()
+        {
+        }
+
         public MainViewModel(IUnityContainer container, AppCommands commands)
         {
             _container = container.RegisterInstance(this);
