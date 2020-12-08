@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F3B8943A-CC9E-4604-91A4-C249D733FEB4}</ProjectGuid>
+    <ProjectGuid>{AC75EFEC-F33A-40EB-B9CB-F781B0114214}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Wpf.Tools</RootNamespace>
-    <AssemblyName>Wpf.Tools</AssemblyName>
+    <RootNamespace>QuotesManager.Repository</RootNamespace>
+    <AssemblyName>QuotesManager.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,10 +32,11 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Globalization" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\sln\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -53,14 +54,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QuotesManager.Interfaces\QuotesManager.Interfaces.csproj">
+      <Project>{731ECDDF-9BA0-4B9D-B259-59515338230C}</Project>
+      <Name>QuotesManager.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\JsonKeys.cs" />
+    <Compile Include="DataTransferObjects\CurrencyCourseDto.cs" />
+    <Compile Include="DataTransferObjects\CurrencyDto.cs" />
+    <Compile Include="DataTransferObjects\CurrencyPreviewDto.cs" />
+    <Compile Include="Interfaces\ICurrencyRepository.cs" />
+    <Compile Include="RepositoryModuleInitializer.cs" />
+    <Compile Include="Services\JsonWebCurrencyRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Base\CommandBase.cs" />
-    <Compile Include="Base\ObservableObject.cs" />
-    <Compile Include="Helpers\ExceptionLogHelper.cs" />
-    <Compile Include="ServiceLocator.cs" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

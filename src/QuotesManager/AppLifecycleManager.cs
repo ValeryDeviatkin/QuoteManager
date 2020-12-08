@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Threading;
 using QuotesManager.Commands;
+using QuotesManager.Interfaces;
+using QuotesManager.Repository;
 using QuotesManager.ViewModels;
 using QuotesManager.Views;
 using Unity;
@@ -31,6 +33,7 @@ namespace QuotesManager
             try
             {
                 _app.DispatcherUnhandledException += OnDispatcherUnhandledException;
+                _container.Resolve<AppSettings>().Init();
 
                 var mainWindow = _container.Resolve<MainWindow>();
                 mainWindow.DataContext = _container.Resolve<MainViewModel>();
@@ -46,7 +49,13 @@ namespace QuotesManager
         {
             try
             {
+                RepositoryModuleInitializer.Instance.Init(_container);
+
                 _container
+                    // Infrastructure.
+                   .RegisterType<AppCommands>()
+                   .RegisterType<AppSettings>()
+                   .RegisterType<ICurrencySourceUrlProvider, AppSettings>()
 
                     // Views.
                    .RegisterSingleton<MainWindow>()
@@ -55,13 +64,12 @@ namespace QuotesManager
                    .RegisterType<MainViewModel>()
 
                     // Commands.
-                   .RegisterType<AppCommands>()
                    .RegisterType<DownloadCurrencyListCommand>()
                    .RegisterType<RefreshCurrencyCommand>()
                    .RegisterType<SearchCurrencyCommand>()
                    .RegisterType<ConvertCurrencyCommand>()
 
-                    // Services.
+                    //
                     ;
             }
             catch (Exception e)

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Tools", "..\src\Wpf.Too
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesManager", "..\src\QuotesManager\QuotesManager.csproj", "{FA1D1A8F-B367-41D3-BD87-6F9ED4B9F489}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesManager.Interfaces", "..\src\QuotesManager.Interfaces\QuotesManager.Interfaces.csproj", "{731ECDDF-9BA0-4B9D-B259-59515338230C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotesManager.Repository", "..\src\QuotesManager.Repository\QuotesManager.Repository.csproj", "{AC75EFEC-F33A-40EB-B9CB-F781B0114214}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{FA1D1A8F-B367-41D3-BD87-6F9ED4B9F489}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA1D1A8F-B367-41D3-BD87-6F9ED4B9F489}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA1D1A8F-B367-41D3-BD87-6F9ED4B9F489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731ECDDF-9BA0-4B9D-B259-59515338230C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731ECDDF-9BA0-4B9D-B259-59515338230C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731ECDDF-9BA0-4B9D-B259-59515338230C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731ECDDF-9BA0-4B9D-B259-59515338230C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC75EFEC-F33A-40EB-B9CB-F781B0114214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC75EFEC-F33A-40EB-B9CB-F781B0114214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC75EFEC-F33A-40EB-B9CB-F781B0114214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC75EFEC-F33A-40EB-B9CB-F781B0114214}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

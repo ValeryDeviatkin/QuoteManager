@@ -1,4 +1,6 @@
-﻿using Unity;
+﻿using QuotesManager.Repository.Interfaces;
+using QuotesManager.ViewModels;
+using Unity;
 using Wpf.Tools.Base;
 
 namespace QuotesManager.Commands
@@ -12,9 +14,18 @@ namespace QuotesManager.Commands
             _container = container.RegisterInstance(this);
         }
 
-        protected override void ExecuteExternal(object parameter)
+        protected override async void ExecuteExternal(object parameter)
         {
-            // TODO: Handle command logic here
+            var mainViewModel = _container.Resolve<MainViewModel>();
+            var repository = _container.Resolve<ICurrencyRepository>();
+            var currencyCodeList = await repository.GetCurrencyListAsync();
+
+            mainViewModel.CurrencyCodeList.Clear();
+
+            foreach (var currency in currencyCodeList)
+            {
+                mainViewModel.CurrencyCodeList.Add(currency);
+            }
         }
     }
 }

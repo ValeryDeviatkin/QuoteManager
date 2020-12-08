@@ -12,7 +12,8 @@
     </d:UserControl.DataContext>
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key = "CurrencySource" />
+        <CollectionViewSource x:Key = "CurrencySource"
+                              Source = "{Binding CurrencyCodeList, Mode=OneTime}" />
     </UserControl.Resources>
 
     <Grid>
@@ -27,7 +28,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height = "Auto" />
                 <RowDefinition Height = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                <RowDefinition Height = "Auto" />
+                <RowDefinition Height = "*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row = "0">
                 <Grid.ColumnDefinitions>
@@ -44,7 +45,39 @@
                 </Button>
             </Grid>
             <ListBox Grid.Row = "2"
-                     ItemsSource = "{Binding Source={StaticResource CurrencySource}, Mode=OneTime}" />
+                     AlternationCount = "2"
+                     SelectedIndex = "0"
+                     SelectedItem = "{Binding SelectedCurrency, Mode=TwoWay}"
+                     ItemsSource = "{Binding Source={StaticResource CurrencySource}, Mode=OneTime}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType = "ListBoxItem">
+                        <Setter Property = "HorizontalContentAlignment"
+                                Value = "Stretch" />
+                        <Style.Triggers>
+                            <Trigger Property = "ItemsControl.AlternationIndex"
+                                     Value = "1">
+                                <Setter Property = "Background"
+                                        Value = "{StaticResource AlternationIndexBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width = "*" />
+                                <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
+                                <ColumnDefinition Width = "Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column = "0"
+                                       Text = "{Binding CharCode, Mode=OneWay}" />
+                            <TextBlock Grid.Column = "2"
+                                       Text = "{Binding NumCode, Mode=OneWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
 
         <Grid Grid.Column = "2">

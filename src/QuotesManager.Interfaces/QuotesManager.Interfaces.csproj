@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F3B8943A-CC9E-4604-91A4-C249D733FEB4}</ProjectGuid>
+    <ProjectGuid>{731ECDDF-9BA0-4B9D-B259-59515338230C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Wpf.Tools</RootNamespace>
-    <AssemblyName>Wpf.Tools</AssemblyName>
+    <RootNamespace>QuotesManager.Interfaces</RootNamespace>
+    <AssemblyName>QuotesManager.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -34,8 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Globalization" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\sln\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -53,14 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <Compile Include="IModuleInitializer.cs" />
+    <Compile Include="ICurrencySourceUrlProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\CommandBase.cs" />
-    <Compile Include="Base\ObservableObject.cs" />
-    <Compile Include="Helpers\ExceptionLogHelper.cs" />
-    <Compile Include="ServiceLocator.cs" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

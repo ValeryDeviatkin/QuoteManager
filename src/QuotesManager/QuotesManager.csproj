@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,15 +34,35 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Globalization" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\sln\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\System.Security.Permissions.5.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,7 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Commands\ConvertCurrencyCommand.cs" />
+    <Compile Include="Constants\SettingsKeys.cs" />
     <Compile Include="Views\Regions\CurrencyConverterRegion.xaml.cs">
       <DependentUpon>CurrencyConverterRegion.xaml</DependentUpon>
     </Compile>
@@ -117,7 +140,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataModels\" />
     <Folder Include="ExtensionMethods\" />
     <Folder Include="Wpf\Behaviors\" />
     <Folder Include="Wpf\Converters\" />
@@ -129,6 +151,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QuotesManager.Interfaces\QuotesManager.Interfaces.csproj">
+      <Project>{731ECDDF-9BA0-4B9D-B259-59515338230C}</Project>
+      <Name>QuotesManager.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuotesManager.Repository\QuotesManager.Repository.csproj">
+      <Project>{AC75EFEC-F33A-40EB-B9CB-F781B0114214}</Project>
+      <Name>QuotesManager.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Wpf.Tools\Wpf.Tools.csproj">
       <Project>{F3B8943A-CC9E-4604-91A4-C249D733FEB4}</Project>
       <Name>Wpf.Tools</Name>
