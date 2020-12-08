@@ -13,96 +13,63 @@
 
     <UserControl.Resources>
         <CollectionViewSource x:Key = "CurrencySource"
-                              Source = "{Binding CurrencyCodeList, Mode=OneTime}" />
+                              Source = "{Binding CurrencyPreviewList, Mode=OneTime}" />
     </UserControl.Resources>
 
     <Grid>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width = "*" />
-            <ColumnDefinition Width = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
-            <ColumnDefinition Width = "*" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column = "0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height = "Auto" />
-                <RowDefinition Height = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                <RowDefinition Height = "*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row = "0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width = "*" />
-                    <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                    <ColumnDefinition Width = "Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column = "0"
-                           Text = "Currency list:" />
-                <Button Grid.Column = "2"
-                        ToolTip = "Refresh"
-                        Command = "{Binding Commands.DownloadCurrencyListCommand, Mode=OneTime}">
-                    <Image Source = "{StaticResource RefreshIcon}" />
-                </Button>
-            </Grid>
-            <ListBox Grid.Row = "2"
-                     AlternationCount = "2"
-                     SelectedIndex = "0"
-                     SelectedItem = "{Binding SelectedCurrency, Mode=TwoWay}"
-                     ItemsSource = "{Binding Source={StaticResource CurrencySource}, Mode=OneTime}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType = "ListBoxItem">
-                        <Setter Property = "HorizontalContentAlignment"
-                                Value = "Stretch" />
-                        <Style.Triggers>
-                            <Trigger Property = "ItemsControl.AlternationIndex"
-                                     Value = "1">
-                                <Setter Property = "Background"
-                                        Value = "{StaticResource AlternationIndexBrush}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width = "*" />
-                                <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                                <ColumnDefinition Width = "Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column = "0"
-                                       Text = "{Binding CharCode, Mode=OneWay}" />
-                            <TextBlock Grid.Column = "2"
-                                       Text = "{Binding NumCode, Mode=OneWay}" />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "Auto" />
+            <RowDefinition Height = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
+            <RowDefinition Height = "*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row = "0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "*" />
+                <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
+                <ColumnDefinition Width = "Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column = "0"
+                       Text = "Currency list:" />
+            <Button Grid.Column = "2"
+                    ToolTip = "Refresh"
+                    Command = "{Binding Commands.DownloadCurrencyListCommand, Mode=OneTime}">
+                <Image Source = "{StaticResource RefreshIcon}" />
+            </Button>
         </Grid>
-
-        <Grid Grid.Column = "2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height = "Auto" />
-                <RowDefinition Height = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                <RowDefinition Height = "Auto" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row = "0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width = "*" />
-                    <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                    <ColumnDefinition Width = "Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column = "0"
-                           Text = "Central bank currency for today:" />
-                <Button Grid.Column = "2"
-                        ToolTip = "Refresh"
-                        Command = "{Binding Commands.RefreshCurrencyCommand, Mode=OneTime}">
-                    <Image Source = "{StaticResource RefreshIcon}" />
-                </Button>
-            </Grid>
-            <Grid Grid.Row = "2" />
-        </Grid>
-
+        <!--todo Virtualization-->
+        <ListBox Grid.Row = "2"
+                 AlternationCount = "2"
+                 SelectedItem = "{Binding SelectedCurrency, Mode=TwoWay}"
+                 ItemsSource = "{Binding Source={StaticResource CurrencySource}, Mode=OneTime}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType = "ListBoxItem">
+                    <Setter Property = "HorizontalContentAlignment"
+                            Value = "Stretch" />
+                    <Style.Triggers>
+                        <Trigger Property = "ItemsControl.AlternationIndex"
+                                 Value = "1">
+                            <Setter Property = "Background"
+                                    Value = "{StaticResource AlternationIndexBrush}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width = "*" />
+                            <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
+                            <ColumnDefinition Width = "Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column = "0"
+                                   Text = "{Binding CharCode, Mode=OneWay}" />
+                        <TextBlock Grid.Column = "2"
+                                   Text = "{Binding NumCode, Mode=OneWay}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 
 </UserControl>

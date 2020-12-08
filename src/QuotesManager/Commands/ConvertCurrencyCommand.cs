@@ -1,9 +1,10 @@
-﻿using Unity;
+﻿using System.Threading.Tasks;
+using Unity;
 using Wpf.Tools.Base;
 
 namespace QuotesManager.Commands
 {
-    public class ConvertCurrencyCommand : CommandBase
+    public class ConvertCurrencyCommand : AsyncCommandBase
     {
         private readonly IUnityContainer _container;
 
@@ -12,9 +13,9 @@ namespace QuotesManager.Commands
             _container = container.RegisterInstance(this);
         }
 
-        protected override void ExecuteExternal(object parameter)
+        protected override async Task ExecuteExternal(object parameter)
         {
-            // TODO: Handle command logic here
+            await Task.Delay(0);
         }
     }
 }

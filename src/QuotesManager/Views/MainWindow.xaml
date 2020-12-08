@@ -25,10 +25,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height = "Auto" />
                 <RowDefinition Height = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
+                <RowDefinition Height = "Auto" />
+                <RowDefinition Height = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
                 <RowDefinition Height = "*" />
             </Grid.RowDefinitions>
-            <regions:CurrencyConverterRegion Grid.Row = "0" />
-            <regions:CurrencySearchRegion Grid.Row = "2" />
+            <regions:CurrencyInfoRegion Grid.Row = "0" />
+            <regions:CurrencyConverterRegion Grid.Row = "2" />
+            <regions:CurrencySearchRegion Grid.Row = "4" />
         </Grid>
     </Grid>
 

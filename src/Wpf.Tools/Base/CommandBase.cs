@@ -1,34 +1,38 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Wpf.Tools.Helpers;
 
 namespace Wpf.Tools.Base
 {
-    public abstract class CommandBase : ICommand
+    public abstract class AsyncCommandBase : ICommand
     {
         private bool _isDisabled;
 
         public virtual bool CanExecute(object parameter) => !_isDisabled;
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             Disable();
 
-            try
+            await Task.Run(async () =>
             {
-                ExecuteExternal(parameter);
-            }
-            catch (Exception e)
-            {
-                this.LogCriticalException(e);
-            }
+                try
+                {
+                    await ExecuteExternal(parameter);
+                }
+                catch (Exception e)
+                {
+                    this.LogCriticalException(e);
+                }
+            });
 
             Enable();
         }
 
         public event EventHandler CanExecuteChanged;
 
-        protected abstract void ExecuteExternal(object parameter);
+        protected abstract Task ExecuteExternal(object parameter);
 
         private void ChangeCanExecute() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
@@ -47,12 +51,12 @@ namespace Wpf.Tools.Base
         }
     }
 
-    public class Command : CommandBase
+    public class Command : AsyncCommandBase
     {
         private readonly Predicate<object> _canExecute;
-        private readonly Action<object> _execute;
+        private readonly Func<object, Task> _execute;
 
-        public Command(Action<object> execute, Predicate<object> canExecute = null)
+        public Command(Func<object, Task> execute, Predicate<object> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -70,9 +74,6 @@ namespace Wpf.Tools.Base
             return isCanExecute;
         }
 
-        protected override void ExecuteExternal(object parameter)
-        {
-            _execute(parameter);
-        }
+        protected override Task ExecuteExternal(object parameter) => _execute(parameter);
     }
 }

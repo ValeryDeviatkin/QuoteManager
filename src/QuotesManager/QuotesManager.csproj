@@ -90,8 +90,12 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Commands\ConvertCurrencyCommand.cs" />
     <Compile Include="Constants\SettingsKeys.cs" />
+    <Compile Include="Helpers\DispatcherHelper.cs" />
     <Compile Include="Views\Regions\CurrencyConverterRegion.xaml.cs">
       <DependentUpon>CurrencyConverterRegion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regions\CurrencyInfoRegion.xaml.cs">
+      <DependentUpon>CurrencyInfoRegion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Regions\CurrencyListRegion.xaml.cs">
       <DependentUpon>CurrencyListRegion.xaml</DependentUpon>
@@ -127,6 +131,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Regions\CurrencyConverterRegion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regions\CurrencyInfoRegion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

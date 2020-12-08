@@ -5,13 +5,32 @@
              xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels = "clr-namespace:QuotesManager.ViewModels"
              xmlns:constants = "clr-namespace:QuotesManager.Constants"
+             xmlns:dataTransferObjects = "clr-namespace:QuotesManager.Repository.DataTransferObjects;assembly=QuotesManager.Repository"
              mc:Ignorable = "d">
 
     <d:UserControl.DataContext>
         <viewModels:MainViewModel />
     </d:UserControl.DataContext>
 
+    <UserControl.Resources>
+        <DataTemplate x:Key = "CurrencyItemTemplate"
+                      DataType = "dataTransferObjects:CurrencyPreviewDto">
+            <TextBlock Text = "{Binding CharCode}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Grid>
+        <Grid.Style>
+            <Style TargetType = "Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding = "{Binding CurrencyPreviewList.Count}"
+                                 Value = "0">
+                        <Setter Property = "IsEnabled"
+                                Value = "False" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
         <Grid.RowDefinitions>
             <RowDefinition Height = "Auto" />
             <RowDefinition Height = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
@@ -39,8 +58,12 @@
                 <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
                 <ColumnDefinition Width = "*" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column = "0" />
-            <TextBox Grid.Column = "2" />
+            <ComboBox Grid.Column = "0"
+                      SelectedItem = "{Binding SourceConvertingCurrency, Mode=TwoWay}"
+                      ItemsSource = "{Binding CurrencyPreviewList, Mode=OneTime}"
+                      ItemTemplate = "{StaticResource CurrencyItemTemplate}" />
+            <TextBox Grid.Column = "2"
+                     Text = "{Binding SourceConvertingValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
         <Grid Grid.Row = "4">
             <Grid.ColumnDefinitions>
@@ -48,8 +71,12 @@
                 <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
                 <ColumnDefinition Width = "*" />
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column = "0" />
-            <TextBox Grid.Column = "2" />
+            <ComboBox Grid.Column = "0"
+                      SelectedItem = "{Binding TargetConvertingCurrency, Mode=TwoWay}"
+                      ItemsSource = "{Binding CurrencyPreviewList, Mode=OneTime}"
+                      ItemTemplate = "{StaticResource CurrencyItemTemplate}" />
+            <TextBox Grid.Column = "2"
+                     Text = "{Binding TargetConvertingValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
     </Grid>
 

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\JsonKeys.cs" />
+    <Compile Include="DataModels\CurrencyDataModel.cs" />
     <Compile Include="DataTransferObjects\CurrencyCourseDto.cs" />
     <Compile Include="DataTransferObjects\CurrencyDto.cs" />
     <Compile Include="DataTransferObjects\CurrencyPreviewDto.cs" />
