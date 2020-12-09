@@ -43,10 +43,17 @@
                 <ColumnDefinition Width = "*" />
                 <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
                 <ColumnDefinition Width = "Auto" />
+                <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
+                <ColumnDefinition Width = "Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column = "0"
                        Text = "Currency converter:" />
             <Button Grid.Column = "2"
+                    ToolTip = "Swap"
+                    Command = "{Binding SwapConvertingCurrenciesCommand, Mode=OneTime}">
+                <Image Source = "{StaticResource SwapIcon}" />
+            </Button>
+            <Button Grid.Column = "4"
                     ToolTip = "Refresh"
                     Command = "{Binding Commands.ConvertCurrencyCommand, Mode=OneTime}">
                 <Image Source = "{StaticResource RefreshIcon}" />
@@ -76,7 +83,8 @@
                       ItemsSource = "{Binding CurrencyPreviewCollection, Mode=OneTime}"
                       ItemTemplate = "{StaticResource CurrencyItemTemplate}" />
             <TextBox Grid.Column = "2"
-                     Text = "{Binding TargetConvertingValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                     IsReadOnly = "True"
+                     Text = "{Binding TargetConvertingValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}" />
         </Grid>
     </Grid>
 

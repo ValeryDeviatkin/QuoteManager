@@ -20,7 +20,7 @@ namespace QuotesManager.Commands
         protected override async Task ExecuteExternal(object parameter)
         {
             var mainViewModel = _container.Resolve<MainViewModel>();
-            var id = (mainViewModel.SelectedCurrency ?? throw new NotSupportedException()).CurrencyId;
+            var id = (mainViewModel.SelectedCurrency ?? throw new NotSupportedException()).Id;
             var repository = _container.Resolve<ICurrencyRepository>();
             var currencyInfo = await repository.GetCurrencyAsync(id);
 

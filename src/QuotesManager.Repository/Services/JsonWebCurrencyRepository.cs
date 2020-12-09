@@ -34,8 +34,8 @@ namespace QuotesManager.Repository.Services
 
         public async Task<IEnumerable<CurrencyInfoDto>> FindCurrencyAsync(string filter)
         {
-            var trimmedFilter = filter?.Trim();
             var currencyMap = await LoadCurrencyListAsync();
+            var trimmedFilter = filter?.Trim();
             var foundCurrencyIdList = new List<string>();
             var foundCurrencyList = new List<CurrencyInfoDto>();
 
@@ -60,8 +60,27 @@ namespace QuotesManager.Repository.Services
             return foundCurrencyList;
         }
 
-        public Task<decimal> ConvertCurrencyAsync(string sourceCurrencyId, decimal sourceCurrencyNominal,
-                                                  string targetCurrencyId) => throw new NotImplementedException();
+        public async Task<decimal> ConvertCurrencyAsync(string sourceCurrencyId, decimal sourceCurrencyNominal,
+                                                        string targetCurrencyId)
+        {
+            if (sourceCurrencyId == targetCurrencyId)
+            {
+                return sourceCurrencyNominal;
+            }
+
+            var currencyMap = await LoadCurrencyListAsync();
+
+            if (!currencyMap.TryGetValue(sourceCurrencyId, out var sourceCurrency) ||
+                !currencyMap.TryGetValue(targetCurrencyId, out var targetCurrency))
+            {
+                throw new NotSupportedException();
+            }
+
+            var sourceUnitValue = sourceCurrency.GetUnitValue();
+            var targetUnitValue = targetCurrency.GetUnitValue();
+
+            return sourceUnitValue / targetUnitValue * sourceCurrencyNominal;
+        }
 
         public void Init(string[] currencyToCalculateIdList)
         {
@@ -70,14 +89,14 @@ namespace QuotesManager.Repository.Services
 
         public async Task<IEnumerable<CurrencyPreviewDto>> GetCurrencyListAsync()
         {
-            var result = new List<CurrencyPreviewDto>();
             var currencyMap = await LoadCurrencyListAsync();
+            var result = new List<CurrencyPreviewDto>();
 
             foreach (var currency in currencyMap.Values)
             {
                 var currencyPreview = new CurrencyPreviewDto
                 {
-                    CurrencyId = currency.Id,
+                    Id = currency.Id,
                     CharCode = currency.CharCode,
                     NumCode = currency.NumCode
                 };
@@ -104,7 +123,7 @@ namespace QuotesManager.Repository.Services
                 Name = currency.Name
             };
 
-            var currentValue = currency.Value / currency.Nominal;
+            var currentUnitValue = currency.GetUnitValue();
             var currencyCourseList = new List<CurrencyCourseDto>();
 
             foreach (var currencyToCalculateId in _currencyToCalculateIdList)
@@ -114,13 +133,13 @@ namespace QuotesManager.Repository.Services
                     throw new NotSupportedException();
                 }
 
-                var currencyToCalculateValue = currencyToCalculate.Value / currencyToCalculate.Nominal;
+                var currencyToCalculateUnitValue = currencyToCalculate.GetUnitValue();
 
                 var currencyCourse = new CurrencyCourseDto
                 {
-                    CurrencyId = currencyToCalculate.Id,
+                    Id = currencyToCalculate.Id,
                     CharCode = currencyToCalculate.CharCode,
-                    Value = currencyToCalculateValue / currentValue
+                    UnitValue = currentUnitValue / currencyToCalculateUnitValue
                 };
 
                 currencyCourseList.Add(currencyCourse);

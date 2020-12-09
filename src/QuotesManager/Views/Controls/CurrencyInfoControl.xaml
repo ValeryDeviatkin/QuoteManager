@@ -19,9 +19,9 @@
                 <Style TargetType = "Grid">
                     <Style.Triggers>
                         <DataTrigger Binding = "{Binding}"
-                                         Value = "{x:Null}">
+                                     Value = "{x:Null}">
                             <Setter Property = "Visibility"
-                                        Value = "Collapsed" />
+                                    Value = "Collapsed" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -35,17 +35,17 @@
                 <TextBlock.Text>
                     <MultiBinding StringFormat = "{}{0} ({1})">
                         <Binding Path = "CharCode"
-                                     Mode = "OneTime" />
+                                 Mode = "OneTime" />
                         <Binding Path = "NumCode"
-                                     Mode = "OneTime" />
+                                 Mode = "OneTime" />
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
             <TextBlock Grid.Row = "1"
-                           TextWrapping = "Wrap"
-                           Text = "{Binding Name, Mode=OneTime}" />
+                       TextWrapping = "Wrap"
+                       Text = "{Binding Name, Mode=OneTime}" />
             <ItemsControl Grid.Row = "2"
-                              ItemsSource = "{Binding Courses, Mode=OneTime}">
+                          ItemsSource = "{Binding Courses, Mode=OneTime}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel />
@@ -57,9 +57,9 @@
                             <TextBlock.Text>
                                 <MultiBinding StringFormat = "{}{0}: {1:0.000}">
                                     <Binding Path = "CharCode"
-                                                 Mode = "OneTime" />
-                                    <Binding Path = "Value"
-                                                 Mode = "OneTime" />
+                                             Mode = "OneTime" />
+                                    <Binding Path = "UnitValue"
+                                             Mode = "OneTime" />
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>

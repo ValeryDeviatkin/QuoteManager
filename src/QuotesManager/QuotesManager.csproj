@@ -185,11 +185,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Theme\Icons\Download50.png" />
     <Resource Include="Theme\Icons\Refresh50.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Theme\Icons\Search50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Theme\Icons\Swap50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

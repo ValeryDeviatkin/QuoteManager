@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using QuotesManager.Repository.DataTransferObjects;
 using Unity;
 using Wpf.Tools.Base;
@@ -118,6 +120,24 @@ namespace QuotesManager.ViewModels
         }
 
         private string _searchString;
+
+        #endregion
+
+        #region SwapConvertingCurrencies command
+
+        public ICommand SwapConvertingCurrenciesCommand => _swapConvertingCurrenciesCommand ??=
+                                                               new Command(ExecuteSwapConvertingCurrencies);
+
+        private Command _swapConvertingCurrenciesCommand;
+
+        private async Task ExecuteSwapConvertingCurrencies(object parameter)
+        {
+            var tmp = SourceConvertingCurrency;
+            SourceConvertingCurrency = TargetConvertingCurrency;
+            TargetConvertingCurrency = tmp;
+
+            await Task.Delay(0);
+        }
 
         #endregion
     }

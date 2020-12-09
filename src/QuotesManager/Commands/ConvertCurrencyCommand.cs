@@ -1,4 +1,7 @@
 ﻿using System.Threading.Tasks;
+using QuotesManager.Helpers;
+using QuotesManager.Repository.Interfaces;
+using QuotesManager.ViewModels;
 using Unity;
 using Wpf.Tools.Base;
 
@@ -15,7 +18,18 @@ namespace QuotesManager.Commands
 
         protected override async Task ExecuteExternal(object parameter)
         {
-            await Task.Delay(0);
+            var mainViewModel = _container.Resolve<MainViewModel>();
+            var repository = _container.Resolve<ICurrencyRepository>();
+            var convertedCurrencyValue = await repository.ConvertCurrencyAsync(
+                                             mainViewModel.SourceConvertingCurrency.Id,
+                                             mainViewModel.SourceConvertingValue,
+                                             mainViewModel.TargetConvertingCurrency.Id);
+
+            await DispatcherHelper.BeginInvokeInMainThread(() =>
+            {
+                mainViewModel.TargetConvertingValue =
+                    convertedCurrencyValue;
+            });
         }
     }
 }

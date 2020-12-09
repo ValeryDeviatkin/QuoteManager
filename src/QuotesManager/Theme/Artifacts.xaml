@@ -13,8 +13,8 @@
     <Brush x:Key = "DefaultBackgroundBrush">WhiteSmoke</Brush>
 
     <!--ICONS-->
-    <BitmapImage x:Key = "DownloadIcon"
-                 UriSource = "pack://application:,,,/QuotesManager;component/Theme/Icons/Download50.png" />
+    <BitmapImage x:Key = "SwapIcon"
+                 UriSource = "pack://application:,,,/QuotesManager;component/Theme/Icons/Swap50.png" />
     <BitmapImage x:Key = "RefreshIcon"
                  UriSource = "pack://application:,,,/QuotesManager;component/Theme/Icons/Refresh50.png" />
     <BitmapImage x:Key = "SearchIcon"
