@@ -31,7 +31,15 @@ namespace QuotesManager.ViewModels
         public CurrencyPreviewDto SelectedCurrency
         {
             get => _selectedCurrency;
-            set => SetProperty(ref _selectedCurrency, value);
+            set => SetProperty(ref _selectedCurrency, value, OnSelectedCurrencyChanged);
+        }
+
+        private void OnSelectedCurrencyChanged()
+        {
+            if (SelectedCurrency != null)
+            {
+                Commands.RefreshCurrencyCommand.Execute(null);
+            }
         }
 
         private CurrencyPreviewDto _selectedCurrency;
@@ -83,6 +91,18 @@ namespace QuotesManager.ViewModels
         }
 
         private decimal _targetConvertingValue;
+
+        #endregion
+
+        #region SelectedCurrencyInfo: CurrencyInfoDto
+
+        public CurrencyInfoDto SelectedCurrencyInfo
+        {
+            get => _selectedCurrencyInfo;
+            set => SetProperty(ref _selectedCurrencyInfo, value);
+        }
+
+        private CurrencyInfoDto _selectedCurrencyInfo;
 
         #endregion
     }

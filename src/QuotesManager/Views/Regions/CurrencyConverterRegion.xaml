@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key = "CurrencyItemTemplate"
                       DataType = "dataTransferObjects:CurrencyPreviewDto">
-            <TextBlock Text = "{Binding CharCode}" />
+            <TextBlock Text = "{Binding CharCode, Mode=OneTime}" />
         </DataTemplate>
     </UserControl.Resources>
 
@@ -56,7 +56,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width = "*" />
                 <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                <ColumnDefinition Width = "*" />
+                <ColumnDefinition Width = "2*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column = "0"
                       SelectedItem = "{Binding SourceConvertingCurrency, Mode=TwoWay}"
@@ -69,7 +69,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width = "*" />
                 <ColumnDefinition Width = "{x:Static constants:UiSizes.InnerSpacingGridLength}" />
-                <ColumnDefinition Width = "*" />
+                <ColumnDefinition Width = "2*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column = "0"
                       SelectedItem = "{Binding TargetConvertingCurrency, Mode=TwoWay}"

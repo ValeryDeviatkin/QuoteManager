@@ -37,6 +37,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -63,6 +66,9 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,6 +97,9 @@
     <Compile Include="Commands\ConvertCurrencyCommand.cs" />
     <Compile Include="Constants\SettingsKeys.cs" />
     <Compile Include="Helpers\DispatcherHelper.cs" />
+    <Compile Include="Views\Controls\CurrencyInfoControl.xaml.cs">
+      <DependentUpon>CurrencyInfoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Regions\CurrencyConverterRegion.xaml.cs">
       <DependentUpon>CurrencyConverterRegion.xaml</DependentUpon>
     </Compile>
@@ -103,6 +112,7 @@
     <Compile Include="Views\Regions\CurrencySearchRegion.xaml.cs">
       <DependentUpon>CurrencySearchRegion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\Behaviors\FrameworkElementWidthBlockerBehavior.cs" />
     <Page Include="Theme\Artifacts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,6 +120,10 @@
     <Page Include="Theme\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\CurrencyInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -148,8 +162,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
-    <Folder Include="Wpf\Behaviors\" />
     <Folder Include="Wpf\Converters\" />
     <Folder Include="Wpf\TemplateSelectors\" />
     <Folder Include="Wpf\TriggerActions\" />

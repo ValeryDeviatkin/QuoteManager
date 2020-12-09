@@ -1,0 +1,74 @@
+﻿<UserControl x:Class = "QuotesManager.Views.Controls.CurrencyInfoControl"
+             xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:constants = "clr-namespace:QuotesManager.Constants"
+             xmlns:dataTransferObjects = "clr-namespace:QuotesManager.Repository.DataTransferObjects;assembly=QuotesManager.Repository"
+             mc:Ignorable = "d">
+
+    <d:UserControl.DataContext>
+        <dataTransferObjects:CurrencyInfoDto />
+    </d:UserControl.DataContext>
+
+
+    <Border BorderThickness = "{x:Static constants:UiSizes.BorderThickness}"
+            BorderBrush = "{StaticResource DefaultBorderBrush}">
+        <ScrollViewer VerticalScrollBarVisibility = "Disabled"
+                      HorizontalScrollBarVisibility = "Auto">
+            <Grid Margin = "{x:Static constants:UiSizes.InnerSpacingThickness}">
+                <Grid.Style>
+                    <Style TargetType = "Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding = "{Binding}"
+                                         Value = "{x:Null}">
+                                <Setter Property = "Visibility"
+                                        Value = "Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "Auto" />
+                    <RowDefinition Height = "Auto" />
+                    <RowDefinition Height = "Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row = "0">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat = "{}{0} ({1})">
+                            <Binding Path = "CharCode"
+                                     Mode = "OneTime" />
+                            <Binding Path = "NumCode"
+                                     Mode = "OneTime" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Grid.Row = "1"
+                           Text = "{Binding Name, Mode=OneTime}" />
+                <ItemsControl Grid.Row = "2"
+                              ItemsSource = "{Binding Courses, Mode=OneTime}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat = "{}{0}: {1:#,#.000}">
+                                        <Binding Path = "CharCode"
+                                                 Mode = "OneTime" />
+                                        <Binding Path = "Value"
+                                                 Mode = "OneTime" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </ScrollViewer>
+    </Border>
+
+</UserControl>

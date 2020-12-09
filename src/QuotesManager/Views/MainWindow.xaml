@@ -5,6 +5,8 @@
         xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:constants = "clr-namespace:QuotesManager.Constants"
         xmlns:regions = "clr-namespace:QuotesManager.Views.Regions"
+        xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviors = "clr-namespace:QuotesManager.Wpf.Behaviors"
         mc:Ignorable = "d"
         Title = "Quote Manager"
         WindowStartupLocation = "CenterScreen"
@@ -14,25 +16,34 @@
         BorderThickness = "{x:Static constants:UiSizes.BorderThickness}"
         BorderBrush = "{StaticResource DefaultBorderBrush}">
 
+    <i:Interaction.Behaviors>
+        <behaviors:FrameworkElementWidthBlockerBehavior />
+    </i:Interaction.Behaviors>
+
     <Grid Margin = "{x:Static constants:UiSizes.OuterSpacingThickness}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "Auto" />
             <ColumnDefinition Width = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
             <ColumnDefinition Width = "Auto" />
+            <ColumnDefinition Width = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
+            <ColumnDefinition Width = "Auto" />
         </Grid.ColumnDefinitions>
         <regions:CurrencyListRegion Grid.Column = "0" />
-        <Grid Grid.Column = "2">
+        <Grid Grid.Column = "2"
+              x:Name = "MiddleRegion">
+            <i:Interaction.Behaviors>
+                <behaviors:FrameworkElementWidthBlockerBehavior />
+            </i:Interaction.Behaviors>
             <Grid.RowDefinitions>
-                <RowDefinition Height = "Auto" />
-                <RowDefinition Height = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
-                <RowDefinition Height = "Auto" />
-                <RowDefinition Height = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
                 <RowDefinition Height = "*" />
+                <RowDefinition Height = "{x:Static constants:UiSizes.OuterSpacingGridLength}" />
+                <RowDefinition Height = "Auto" />
             </Grid.RowDefinitions>
             <regions:CurrencyInfoRegion Grid.Row = "0" />
             <regions:CurrencyConverterRegion Grid.Row = "2" />
-            <regions:CurrencySearchRegion Grid.Row = "4" />
         </Grid>
+        <regions:CurrencySearchRegion Grid.Column = "4"
+                                      Width = "{Binding ElementName=MiddleRegion, Path=ActualWidth, Mode=OneWay}" />
     </Grid>
 
 </Window>

@@ -7,8 +7,8 @@ namespace QuotesManager.Repository.Interfaces
     public interface ICurrencyRepository
     {
         Task<IEnumerable<CurrencyPreviewDto>> GetCurrencyListAsync();
-        Task<CurrencyDto> GetCurrencyAsync(string id);
-        Task<IEnumerable<CurrencyDto>> FindCurrencyAsync(string filter);
+        Task<CurrencyInfoDto> GetCurrencyAsync(string id);
+        Task<IEnumerable<CurrencyInfoDto>> FindCurrencyAsync(string filter);
 
         Task<decimal> ConvertCurrencyAsync(string sourceCurrencyId, decimal sourceCurrencyNominal,
                                            string targetCurrencyId);

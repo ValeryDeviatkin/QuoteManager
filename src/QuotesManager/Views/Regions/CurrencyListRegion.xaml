@@ -63,9 +63,9 @@
                             <ColumnDefinition Width = "Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column = "0"
-                                   Text = "{Binding CharCode, Mode=OneWay}" />
+                                   Text = "{Binding CharCode, Mode=OneTime}" />
                         <TextBlock Grid.Column = "2"
-                                   Text = "{Binding NumCode, Mode=OneWay}" />
+                                   Text = "{Binding NumCode, Mode=OneTime}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

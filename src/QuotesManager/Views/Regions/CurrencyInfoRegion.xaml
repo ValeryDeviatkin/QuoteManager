@@ -5,6 +5,7 @@
              xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
              xmlns:constants = "clr-namespace:QuotesManager.Constants"
              xmlns:viewModels = "clr-namespace:QuotesManager.ViewModels"
+             xmlns:controls = "clr-namespace:QuotesManager.Views.Controls"
              mc:Ignorable = "d">
 
     <d:UserControl.DataContext>
@@ -42,7 +43,8 @@
                 <Image Source = "{StaticResource RefreshIcon}" />
             </Button>
         </Grid>
-        <Grid Grid.Row = "2" />
+        <controls:CurrencyInfoControl Grid.Row = "2"
+                                      DataContext = "{Binding SelectedCurrencyInfo, Mode=OneWay}" />
     </Grid>
 
 </UserControl>
