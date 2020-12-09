@@ -40,18 +40,10 @@
                  AlternationCount = "2"
                  Background = "Transparent"
                  Padding = "0"
+                 BorderThickness = "{x:Static constants:UiSizes.BorderThickness}"
+                 BorderBrush = "{StaticResource DefaultBorderBrush}"
                  SelectedItem = "{Binding SelectedCurrency, Mode=TwoWay}"
                  ItemsSource = "{Binding Source={StaticResource CurrencySource}, Mode=OneTime}">
-            <ListBox.Style>
-                <Style TargetType = "ListBox">
-                    <Style.Resources>
-                        <SolidColorBrush x:Key = "{x:Static SystemColors.HighlightBrushKey}"
-                                         Color = "Red" />
-                        <SolidColorBrush x:Key = "{x:Static SystemColors.ControlBrushKey}"
-                                         Color = "Green" />
-                    </Style.Resources>
-                </Style>
-            </ListBox.Style>
             <ListBox.ItemContainerStyle>
                 <Style TargetType = "ListBoxItem">
                     <Setter Property = "HorizontalContentAlignment"
