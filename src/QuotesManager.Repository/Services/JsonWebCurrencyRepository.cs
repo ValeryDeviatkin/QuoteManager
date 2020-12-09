@@ -8,6 +8,7 @@ using QuotesManager.Interfaces;
 using QuotesManager.Repository.Constants;
 using QuotesManager.Repository.DataModels;
 using QuotesManager.Repository.DataTransferObjects;
+using QuotesManager.Repository.ExtensionMethods;
 using QuotesManager.Repository.Interfaces;
 using Unity;
 
@@ -15,9 +16,8 @@ namespace QuotesManager.Repository.Services
 {
     internal class JsonWebCurrencyRepository : ICurrencyRepository
     {
-        private const string ControlCurrencyId = "R01090B";
         private readonly IUnityContainer _container;
-        private readonly string[] _currencyToCalculateIdList = {ControlCurrencyId, "R01235", "R01239"};
+        private string[] _currencyToCalculateIdList;
 
         public JsonWebCurrencyRepository(IUnityContainer container)
         {
@@ -27,58 +27,46 @@ namespace QuotesManager.Repository.Services
         public async Task<CurrencyInfoDto> GetCurrencyAsync(string id)
         {
             var currencyMap = await LoadCurrencyListAsync();
-
-            if (!currencyMap.TryGetValue(id, out var currency))
-            {
-                throw new NotSupportedException();
-            }
-
-            var currencyInfo = new CurrencyInfoDto
-            {
-                Id = currency.Id,
-                CharCode = currency.CharCode,
-                NumCode = currency.NumCode,
-                Name = currency.Name
-            };
-
-            if (!currencyMap.TryGetValue(ControlCurrencyId, out var controlCurrency))
-            {
-                throw new NotSupportedException();
-            }
-
-            var controlRate = controlCurrency.Nominal / controlCurrency.Value;
-            var currentValue = currency.Value / currency.Nominal;
-            var currencyCourseList = new List<CurrencyCourseDto>();
-
-            foreach (var currencyToCalculateId in _currencyToCalculateIdList)
-            {
-                if (!currencyMap.TryGetValue(currencyToCalculateId, out var currencyToCalculate))
-                {
-                    throw new NotSupportedException();
-                }
-
-                var currencyToCalculateValue = currencyToCalculate.Value / currencyToCalculate.Nominal;
-
-                var currencyCourse = new CurrencyCourseDto
-                {
-                    CurrencyId = currencyToCalculate.Id,
-                    CharCode = currencyToCalculate.CharCode,
-                    Value = currentValue * currencyToCalculateValue * controlRate
-                };
-
-                currencyCourseList.Add(currencyCourse);
-            }
-
-            currencyInfo.Courses = currencyCourseList.ToArray();
+            var currencyInfo = CreateCurrencyInfo(id, currencyMap);
 
             return currencyInfo;
         }
 
-        public Task<IEnumerable<CurrencyInfoDto>> FindCurrencyAsync(string filter) =>
-            throw new NotImplementedException();
+        public async Task<IEnumerable<CurrencyInfoDto>> FindCurrencyAsync(string filter)
+        {
+            var trimmedFilter = filter?.Trim();
+            var currencyMap = await LoadCurrencyListAsync();
+            var foundCurrencyIdList = new List<string>();
+            var foundCurrencyList = new List<CurrencyInfoDto>();
+
+            foreach (var currency in currencyMap.Values)
+            {
+                if (string.IsNullOrEmpty(trimmedFilter) ||
+                    currency.CharCode.IsMatchString(trimmedFilter) ||
+                    currency.NumCode.IsMatchString(trimmedFilter) ||
+                    currency.Name.IsMatchString(trimmedFilter))
+                {
+                    foundCurrencyIdList.Add(currency.Id);
+                }
+            }
+
+            foreach (var id in foundCurrencyIdList)
+            {
+                var currencyInfo = CreateCurrencyInfo(id, currencyMap);
+
+                foundCurrencyList.Add(currencyInfo);
+            }
+
+            return foundCurrencyList;
+        }
 
         public Task<decimal> ConvertCurrencyAsync(string sourceCurrencyId, decimal sourceCurrencyNominal,
                                                   string targetCurrencyId) => throw new NotImplementedException();
+
+        public void Init(string[] currencyToCalculateIdList)
+        {
+            _currencyToCalculateIdList = currencyToCalculateIdList;
+        }
 
         public async Task<IEnumerable<CurrencyPreviewDto>> GetCurrencyListAsync()
         {
@@ -98,6 +86,49 @@ namespace QuotesManager.Repository.Services
             }
 
             return result;
+        }
+
+        private CurrencyInfoDto CreateCurrencyInfo(
+            string id, IReadOnlyDictionary<string, CurrencyDataModel> currencyMap)
+        {
+            if (!currencyMap.TryGetValue(id, out var currency))
+            {
+                throw new NotSupportedException();
+            }
+
+            var currencyInfo = new CurrencyInfoDto
+            {
+                Id = currency.Id,
+                CharCode = currency.CharCode,
+                NumCode = currency.NumCode,
+                Name = currency.Name
+            };
+
+            var currentValue = currency.Value / currency.Nominal;
+            var currencyCourseList = new List<CurrencyCourseDto>();
+
+            foreach (var currencyToCalculateId in _currencyToCalculateIdList)
+            {
+                if (!currencyMap.TryGetValue(currencyToCalculateId, out var currencyToCalculate))
+                {
+                    throw new NotSupportedException();
+                }
+
+                var currencyToCalculateValue = currencyToCalculate.Value / currencyToCalculate.Nominal;
+
+                var currencyCourse = new CurrencyCourseDto
+                {
+                    CurrencyId = currencyToCalculate.Id,
+                    CharCode = currencyToCalculate.CharCode,
+                    Value = currencyToCalculateValue / currentValue
+                };
+
+                currencyCourseList.Add(currencyCourse);
+            }
+
+            currencyInfo.Courses = currencyCourseList.ToArray();
+
+            return currencyInfo;
         }
 
         private async Task<Dictionary<string, CurrencyDataModel>> LoadCurrencyListAsync()

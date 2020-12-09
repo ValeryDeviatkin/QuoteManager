@@ -23,7 +23,7 @@
         <Grid.Style>
             <Style TargetType = "Grid">
                 <Style.Triggers>
-                    <DataTrigger Binding = "{Binding CurrencyPreviewList.Count}"
+                    <DataTrigger Binding = "{Binding CurrencyPreviewCollection.Count}"
                                  Value = "0">
                         <Setter Property = "IsEnabled"
                                 Value = "False" />
@@ -60,7 +60,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column = "0"
                       SelectedItem = "{Binding SourceConvertingCurrency, Mode=TwoWay}"
-                      ItemsSource = "{Binding CurrencyPreviewList, Mode=OneTime}"
+                      ItemsSource = "{Binding CurrencyPreviewCollection, Mode=OneTime}"
                       ItemTemplate = "{StaticResource CurrencyItemTemplate}" />
             <TextBox Grid.Column = "2"
                      Text = "{Binding SourceConvertingValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -73,7 +73,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column = "0"
                       SelectedItem = "{Binding TargetConvertingCurrency, Mode=TwoWay}"
-                      ItemsSource = "{Binding CurrencyPreviewList, Mode=OneTime}"
+                      ItemsSource = "{Binding CurrencyPreviewCollection, Mode=OneTime}"
                       ItemTemplate = "{StaticResource CurrencyItemTemplate}" />
             <TextBox Grid.Column = "2"
                      Text = "{Binding TargetConvertingValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

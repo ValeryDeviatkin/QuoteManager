@@ -65,6 +65,7 @@
     <Compile Include="DataTransferObjects\CurrencyCourseDto.cs" />
     <Compile Include="DataTransferObjects\CurrencyDto.cs" />
     <Compile Include="DataTransferObjects\CurrencyPreviewDto.cs" />
+    <Compile Include="ExtensionMethods\StringEx.cs" />
     <Compile Include="Interfaces\ICurrencyRepository.cs" />
     <Compile Include="RepositoryModuleInitializer.cs" />
     <Compile Include="Services\JsonWebCurrencyRepository.cs" />

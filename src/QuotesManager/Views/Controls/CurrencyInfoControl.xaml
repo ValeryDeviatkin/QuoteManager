@@ -14,61 +14,59 @@
 
     <Border BorderThickness = "{x:Static constants:UiSizes.BorderThickness}"
             BorderBrush = "{StaticResource DefaultBorderBrush}">
-        <ScrollViewer VerticalScrollBarVisibility = "Disabled"
-                      HorizontalScrollBarVisibility = "Auto">
-            <Grid Margin = "{x:Static constants:UiSizes.InnerSpacingThickness}">
-                <Grid.Style>
-                    <Style TargetType = "Grid">
-                        <Style.Triggers>
-                            <DataTrigger Binding = "{Binding}"
+        <Grid Margin = "{x:Static constants:UiSizes.InnerSpacingThickness}">
+            <Grid.Style>
+                <Style TargetType = "Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding = "{Binding}"
                                          Value = "{x:Null}">
-                                <Setter Property = "Visibility"
+                            <Setter Property = "Visibility"
                                         Value = "Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height = "Auto" />
-                    <RowDefinition Height = "Auto" />
-                    <RowDefinition Height = "Auto" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row = "0">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat = "{}{0} ({1})">
-                            <Binding Path = "CharCode"
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height = "Auto" />
+                <RowDefinition Height = "Auto" />
+                <RowDefinition Height = "Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row = "0">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat = "{}{0} ({1})">
+                        <Binding Path = "CharCode"
                                      Mode = "OneTime" />
-                            <Binding Path = "NumCode"
+                        <Binding Path = "NumCode"
                                      Mode = "OneTime" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-                <TextBlock Grid.Row = "1"
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Grid.Row = "1"
+                           TextWrapping = "Wrap"
                            Text = "{Binding Name, Mode=OneTime}" />
-                <ItemsControl Grid.Row = "2"
+            <ItemsControl Grid.Row = "2"
                               ItemsSource = "{Binding Courses, Mode=OneTime}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat = "{}{0}: {1:#,#.000}">
-                                        <Binding Path = "CharCode"
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat = "{}{0}: {1:0.000}">
+                                    <Binding Path = "CharCode"
                                                  Mode = "OneTime" />
-                                        <Binding Path = "Value"
+                                    <Binding Path = "Value"
                                                  Mode = "OneTime" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
-        </ScrollViewer>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </Border>
 
 </UserControl>

@@ -6,6 +6,7 @@ namespace QuotesManager.Repository.Interfaces
 {
     public interface ICurrencyRepository
     {
+        void Init(string[] currencyToCalculateIdList);
         Task<IEnumerable<CurrencyPreviewDto>> GetCurrencyListAsync();
         Task<CurrencyInfoDto> GetCurrencyAsync(string id);
         Task<IEnumerable<CurrencyInfoDto>> FindCurrencyAsync(string filter);

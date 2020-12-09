@@ -23,7 +23,10 @@ namespace QuotesManager.ViewModels
 
         public AppCommands Commands { get; }
 
-        public ObservableCollection<CurrencyPreviewDto> CurrencyPreviewList { get; } =
+        public ObservableCollection<CurrencyInfoDto> FoundCurrencyCollection { get; } =
+            new ObservableCollection<CurrencyInfoDto>();
+
+        public ObservableCollection<CurrencyPreviewDto> CurrencyPreviewCollection { get; } =
             new ObservableCollection<CurrencyPreviewDto>();
 
         #region SelectedCurrency: CurrencyPreviewDto
@@ -103,6 +106,18 @@ namespace QuotesManager.ViewModels
         }
 
         private CurrencyInfoDto _selectedCurrencyInfo;
+
+        #endregion
+
+        #region SearchString: string
+
+        public string SearchString
+        {
+            get => _searchString;
+            set => SetProperty(ref _searchString, value);
+        }
+
+        private string _searchString;
 
         #endregion
     }

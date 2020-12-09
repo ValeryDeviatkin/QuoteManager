@@ -3,6 +3,7 @@ using System.Windows.Threading;
 using QuotesManager.Commands;
 using QuotesManager.Interfaces;
 using QuotesManager.Repository;
+using QuotesManager.Repository.Interfaces;
 using QuotesManager.ViewModels;
 using QuotesManager.Views;
 using Unity;
@@ -34,6 +35,8 @@ namespace QuotesManager
             {
                 _app.DispatcherUnhandledException += OnDispatcherUnhandledException;
                 _container.Resolve<AppSettings>().Init();
+                _container.Resolve<ICurrencyRepository>()
+                          .Init(_container.Resolve<AppSettings>().CurrencyToCalculateIdList);
 
                 var mainWindow = _container.Resolve<MainWindow>();
                 mainWindow.DataContext = _container.Resolve<MainViewModel>();

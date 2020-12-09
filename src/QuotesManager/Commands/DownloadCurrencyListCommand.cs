@@ -25,14 +25,14 @@ namespace QuotesManager.Commands
 
             await DispatcherHelper.BeginInvokeInMainThread(() =>
             {
-                mainViewModel.CurrencyPreviewList.Clear();
+                mainViewModel.CurrencyPreviewCollection.Clear();
 
                 foreach (var currency in currencyCodeList)
                 {
-                    mainViewModel.CurrencyPreviewList.Add(currency);
+                    mainViewModel.CurrencyPreviewCollection.Add(currency);
                 }
 
-                var selectedCurrency = mainViewModel.CurrencyPreviewList.FirstOrDefault();
+                var selectedCurrency = mainViewModel.CurrencyPreviewCollection.FirstOrDefault();
                 mainViewModel.SelectedCurrency = selectedCurrency;
                 mainViewModel.SourceConvertingCurrency = selectedCurrency;
                 mainViewModel.TargetConvertingCurrency = selectedCurrency;
