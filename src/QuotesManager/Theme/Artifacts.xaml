@@ -7,6 +7,9 @@
     <system:Double x:Key = "IconButtonSize">25</system:Double>
 
     <!--COLORS-->
+    <Brush x:Key = "ListItemMouseOverBrush">Goldenrod</Brush>
+    <Brush x:Key = "ListItemSelectedBrush">LimeGreen</Brush>
+    <Brush x:Key = "ListItemMouseMouseOverSelectedBrush">LightGreen</Brush>
     <Brush x:Key = "AlternationIndexBrush">LightGray</Brush>
     <Brush x:Key = "DefaultBorderBrush">Black</Brush>
     <Brush x:Key = "DefaultForegroundBrush">Black</Brush>

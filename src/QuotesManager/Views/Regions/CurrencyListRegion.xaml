@@ -38,18 +38,72 @@
         </Grid>
         <ListBox Grid.Row = "2"
                  AlternationCount = "2"
+                 Background = "Transparent"
+                 Padding = "0"
                  SelectedItem = "{Binding SelectedCurrency, Mode=TwoWay}"
                  ItemsSource = "{Binding Source={StaticResource CurrencySource}, Mode=OneTime}">
+            <ListBox.Style>
+                <Style TargetType = "ListBox">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key = "{x:Static SystemColors.HighlightBrushKey}"
+                                         Color = "Red" />
+                        <SolidColorBrush x:Key = "{x:Static SystemColors.ControlBrushKey}"
+                                         Color = "Green" />
+                    </Style.Resources>
+                </Style>
+            </ListBox.Style>
             <ListBox.ItemContainerStyle>
                 <Style TargetType = "ListBoxItem">
                     <Setter Property = "HorizontalContentAlignment"
                             Value = "Stretch" />
+                    <Setter Property = "Padding"
+                            Value = "{x:Static constants:UiSizes.InnerSpacingThickness}" />
+                    <Setter Property = "BorderThickness"
+                            Value = "0" />
+                    <Setter Property = "Margin"
+                            Value = "0" />
+                    <Setter Property = "Background"
+                            Value = "Transparent" />
+                    <Setter Property = "Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType = "ListBoxItem">
+                                <Border Padding = "{TemplateBinding Padding}"
+                                        Margin = "{TemplateBinding Margin}"
+                                        Background = "{TemplateBinding Background}"
+                                        BorderBrush = "{TemplateBinding BorderBrush}"
+                                        BorderThickness = "{TemplateBinding BorderThickness}">
+                                    <ContentPresenter
+                                        HorizontalAlignment = "{TemplateBinding HorizontalContentAlignment}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                     <Style.Triggers>
                         <Trigger Property = "ItemsControl.AlternationIndex"
                                  Value = "1">
                             <Setter Property = "Background"
                                     Value = "{StaticResource AlternationIndexBrush}" />
                         </Trigger>
+                        <Trigger Property = "IsSelected"
+                                 Value = "True">
+                            <Setter Property = "Background"
+                                    Value = "{StaticResource ListItemSelectedBrush}" />
+                        </Trigger>
+                        <Trigger Property = "IsMouseOver"
+                                 Value = "True">
+                            <Setter Property = "Background"
+                                    Value = "{StaticResource ListItemMouseOverBrush}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property = "IsSelected"
+                                           Value = "True" />
+                                <Condition Property = "IsMouseOver"
+                                           Value = "True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property = "Background"
+                                    Value = "{StaticResource ListItemMouseMouseOverSelectedBrush}" />
+                        </MultiTrigger>
                     </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
